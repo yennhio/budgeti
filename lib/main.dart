@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
+        fontFamily: 'Open Sans'
       ),
       home: MyHomePage(title: 'My spending this month'),
     );
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.only(top:150, left:40),
                   child: Text(
                     'My Spending',
-                        style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 35, color: Colors.white, fontWeight: FontWeight.w600),
                   )
                 )
               ],
@@ -89,14 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.only(left: 70, top:40),
                   child: Text(
                     'Income',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 23),
                   ),
                 ),
                 Container(
                   width: 100,
                     margin: EdgeInsets.only(right: 70, top: 40),
                     child: TextField(
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 23),
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -118,14 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: EdgeInsets.only(left: 70),
                     child: Text(
                       'Remaining',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 23),
                     )
                 ),
                 Container(
                   width: 100,
                   margin: EdgeInsets.only(right: 70),
                   child: TextField(
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 23),
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 )
               ]
-            )
+            ),
           ],
       ),
       ),
