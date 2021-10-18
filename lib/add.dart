@@ -15,7 +15,6 @@ class _AddPageState extends State<AddPage> {
       body: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: 100,
@@ -35,9 +34,11 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ),
             ),
+          ],
+          ),
           Container(
             margin: EdgeInsets.only(top: 20),
-            width: 300,
+            width: 200,
             child: TextField(
               obscureText: false,
               maxLines: 10,
@@ -58,26 +59,8 @@ class _AddPageState extends State<AddPage> {
           ),
         ],
     )
-    ]
-    ),
     );
+
 }
 
-String selectCategory = "";
-
-final categorySelected = TextEditingController();
-
-List<String> categories = [
-  "Food",
-  "Auto",
-  "Medical",
-  "School",
-  "Miscellaneous",
-  "Shopping",
-  "Grocery",
-  "Loans",
-  "Gas",
-  "Insurance",
-  "Rent"
-];
 }
