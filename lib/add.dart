@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -17,13 +18,10 @@ class _AddPageState extends State<AddPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.only(top:100, left: 45),
-                width: 155,
+                width: 100,
+                margin: EdgeInsets.only(top:100, left: 47),
                 child: TextField(
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                      hintText: "Category"
-                  ),
+                  keyboardType: TextInputType.number,
                 ),
               ),
               Container(
@@ -36,9 +34,7 @@ class _AddPageState extends State<AddPage> {
                       counterText: ""
                   ),
                 ),
-              ),
-            ]
-          ),
+            ),
           Container(
             margin: EdgeInsets.only(top: 20),
             width: 300,
@@ -62,6 +58,26 @@ class _AddPageState extends State<AddPage> {
           ),
         ],
     )
+    ]
+    ),
     );
-  }
+}
+
+String selectCategory = "";
+
+final categorySelected = TextEditingController();
+
+List<String> categories = [
+  "Food",
+  "Auto",
+  "Medical",
+  "School",
+  "Miscellaneous",
+  "Shopping",
+  "Grocery",
+  "Loans",
+  "Gas",
+  "Insurance",
+  "Rent"
+];
 }

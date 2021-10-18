@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Open Sans'
@@ -47,8 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
+      body: Column(
           children: <Widget>[
             Stack(
               children: [
@@ -82,66 +82,77 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: 70, top:40),
-                  child: Text(
-                    'Income',
-                    style: TextStyle(fontSize: 23),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 50, top: 40),
+                    child: Text(
+                      'Income',
+                      style: TextStyle(fontSize: 23),
+                    ),
+                       ),
+                  Container(
+                    margin: EdgeInsets.only(left: 70,top: 40),
+                    child: Icon(
+                      Icons.attach_money,
+                      size: 35
+                    ),
                   ),
-                ),
-                Container(
-                  width: 100,
-                    margin: EdgeInsets.only(right: 70, top: 40),
+                  Container(
+                    margin: EdgeInsets.only(right: 50, top: 40),
+                    width: 100,
+                      child: TextField(
+                        style: TextStyle(fontSize: 23),
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue)),
+                            counterText: ""
+                        ),
+                      ),
+                     ),
+                ],
+              ),
+             Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(left: 50),
+                      child: Text(
+                        'Remaining',
+                        style: TextStyle(fontSize: 23),
+                      )
+                  ),
+                    Container(
+                      margin: EdgeInsets.only(left: 35),
+                      child: Icon(
+                          Icons.attach_money,
+                          size: 35
+                      ),
+                    ),
+                  Container(
+                    width: 100,
+                    margin: EdgeInsets.only(right: 50),
                     child: TextField(
                       style: TextStyle(fontSize: 23),
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: UnderlineInputBorder(
+                          counterText: "",
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue)),
-                          icon: Icon(Icons.attach_money),
-                          counterText: ""
                       ),
                     ),
-                  ),
-              ],
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                Container(
-                    margin: EdgeInsets.only(left: 70),
-                    child: Text(
-                      'Remaining',
-                      style: TextStyle(fontSize: 23),
-                    )
-                ),
-                Container(
-                  width: 100,
-                  margin: EdgeInsets.only(right: 70),
-                  child: TextField(
-                    style: TextStyle(fontSize: 23),
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.attach_money),
-                        counterText: "",
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)),
-                    ),
-                  ),
-                )
-              ]
-            ),
+                  )
+                ]
+              ),
           ],
-      ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
