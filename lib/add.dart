@@ -20,7 +20,7 @@ class _AddPageState extends State<AddPage> {
             width: 250,
             margin: EdgeInsets.only(top:100, left: 47),
             child: TextField(
-              keyboardType: TextInputType.number,
+              textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Category e.g. McDonald's"

@@ -83,21 +83,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(left: 50, top: 40),
+                    margin: EdgeInsets.only(left: 60, top: 40),
                     child: Text(
                       'Income',
                       style: TextStyle(fontSize: 23),
                     ),
                        ),
                   Container(
-                    margin: EdgeInsets.only(left: 70,top: 40),
+                    margin: EdgeInsets.only(left: 50,top: 40),
                     child: Icon(
                       Icons.attach_money,
                       size: 35
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: 50, top: 40),
+                    margin: EdgeInsets.only(right: 60, top: 40),
                     width: 100,
                       child: TextField(
                         controller: textController,
@@ -119,14 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(left: 50),
+                      margin: EdgeInsets.only(left: 60),
                       child: Text(
                         'Remaining',
                         style: TextStyle(fontSize: 23),
                       )
                   ),
                     Container(
-                      margin: EdgeInsets.only(left: 35),
+                      margin: EdgeInsets.only(left: 14),
                       child: Icon(
                           Icons.attach_money,
                           size: 35
@@ -134,13 +134,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   Container(
                     width: 100,
-                    margin: EdgeInsets.only(right: 50),
+                    margin: EdgeInsets.only(right: 8),
                     child: Text(
-                      remain == null ? 'Please enter a number!' : remain.toString(),
+                      remain == null ? '0' : remain.toString(),
                       style: TextStyle(fontSize: 23),
                       textAlign: TextAlign.center,
                     ),
                   ),
+                    Container(
+                        child: (IconButton(
+                          onPressed: calculateRemaining,
+                          icon: Icon(Icons.refresh),
+                        ))
+                    )
                 ]
               ),
 
