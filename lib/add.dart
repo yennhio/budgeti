@@ -10,6 +10,15 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
+
+  late String category = '';
+  late String note = '';
+  late double total = 0;
+
+  final getCategory = TextEditingController();
+  final getNotes = TextEditingController();
+  final getTotal = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +29,7 @@ class _AddPageState extends State<AddPage> {
             width: 250,
             margin: EdgeInsets.only(top:100, left: 47),
             child: TextField(
+              controller: getCategory,
               textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -31,6 +41,7 @@ class _AddPageState extends State<AddPage> {
             margin: EdgeInsets.only(left: 47, top: 20),
             width: 300,
             child: TextField(
+              controller: getNotes,
               obscureText: false,
               maxLines: 4,
               textCapitalization: TextCapitalization.sentences,
@@ -54,6 +65,7 @@ class _AddPageState extends State<AddPage> {
                 width: 200,
                 margin: EdgeInsets.only(top: 20, left: 30, right: 47),
                 child: TextField(
+                  controller: getTotal,
                   keyboardType: TextInputType.number,
                   style: TextStyle(fontSize: 23),
                   decoration: InputDecoration(
