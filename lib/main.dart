@@ -31,16 +31,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late double remain = 0;
+  final textController = TextEditingController();
 
-  void _incrementCounter() {
+  void calculateRemaining() {
+    final enteredNumber = double.parse(textController.text);
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      remain = enteredNumber - 5;
     });
   }
 
@@ -103,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: EdgeInsets.only(right: 50, top: 40),
                     width: 100,
                       child: TextField(
+                        controller: textController,
                         style: TextStyle(fontSize: 23),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
@@ -137,21 +135,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: 100,
                     margin: EdgeInsets.only(right: 50),
-                    child: TextField(
+                    child: Text(
+                      remain == null ? 'Please enter a number!' : remain.toString(),
                       style: TextStyle(fontSize: 23),
                       textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          counterText: "",
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue)),
-                      ),
                     ),
-                  )
+                  ),
                 ]
               ),
+
           ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -163,6 +155,9 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+
+
+
     );
   }
 }
