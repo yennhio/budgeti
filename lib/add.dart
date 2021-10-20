@@ -82,7 +82,7 @@ class _AddPageState extends State<AddPage> {
                   keyboardType: TextInputType.number,
                   style: TextStyle(fontSize: 23),
                   decoration: InputDecoration(
-                      icon: Icon(Icons.attach_money),
+                      prefixIcon: Icon(Icons.attach_money),
                       contentPadding: EdgeInsets.all(10),
                       filled: true,
                       fillColor: Colors.blue.shade100,
