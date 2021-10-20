@@ -32,7 +32,13 @@ class _AddPageState extends State<AddPage> {
               controller: getCategory,
               textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
+                  filled: true,
+                  fillColor: Colors.blue.shade100,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none
+                  ),
                   hintText: "Category e.g. McDonald's"
               ),
             ),
@@ -46,7 +52,13 @@ class _AddPageState extends State<AddPage> {
               maxLines: 4,
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(10),
+                  filled: true,
+                  fillColor: Colors.blue.shade100,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none
+                  ),
                 hintText: "Notes"
               ),
             ),
@@ -70,7 +82,13 @@ class _AddPageState extends State<AddPage> {
                   style: TextStyle(fontSize: 23),
                   decoration: InputDecoration(
                       icon: Icon(Icons.attach_money),
-                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.all(10),
+                      filled: true,
+                      fillColor: Colors.blue.shade100,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none
+                      ),
                       counterText: ""
                   ),
                 ),
