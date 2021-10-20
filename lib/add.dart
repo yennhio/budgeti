@@ -106,7 +106,7 @@ class _AddPageState extends State<AddPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Save'),
+              child: const Text('Add Expense'),
             ),
           ),
         ],
