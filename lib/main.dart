@@ -93,7 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: EdgeInsets.only(left: 50,top: 40),
                     child: Icon(
                       Icons.attach_money,
-                      size: 35
+                      size: 35,
+                      color: Colors.grey
                     ),
                   ),
                   Container(
@@ -133,22 +134,31 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: EdgeInsets.only(left: 14),
                       child: Icon(
                           Icons.attach_money,
-                          size: 35
+                          size: 35,
+                        color: Colors.grey
                       ),
                     ),
                   Container(
                     width: 100,
-                    child: Text(
-                      remain == null ? '0' : remain.toString(),
-                      style: TextStyle(fontSize: 23),
-                      textAlign: TextAlign.center,
+                    height: 39,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade100,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: Text(
+                        remain == null ? '0' : remain.toString(),
+                        style: TextStyle(
+                            fontSize: 23),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                     Container(
                         margin: EdgeInsets.only(right: 8),
                         child: (IconButton(
                           onPressed: calculateRemaining,
-                          icon: Icon(Icons.refresh),
+                          icon: Icon(Icons.refresh, color: Colors.grey),
                         ))
                     )
                 ]
