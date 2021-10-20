@@ -29,6 +29,7 @@ class _AddPageState extends State<AddPage> {
             width: 250,
             margin: EdgeInsets.only(top:100, left: 47),
             child: TextField(
+              style: TextStyle(fontSize: 16),
               controller: getCategory,
               textCapitalization: TextCapitalization.words,
               decoration: InputDecoration(
