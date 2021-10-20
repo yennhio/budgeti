@@ -10,13 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Budgit Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Open Sans'
       ),
-      home: MyHomePage(title: 'My spending this month'),
+      home: MyHomePage(title: 'My spending'),
     );
   }
 }
@@ -105,10 +105,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue)),
+                          contentPadding: EdgeInsets.only(top: 10),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.blue.shade100,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none
+                            ),
                             counterText: ""
                         ),
                       ),
@@ -134,7 +138,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   Container(
                     width: 100,
-                    margin: EdgeInsets.only(right: 8),
                     child: Text(
                       remain == null ? '0' : remain.toString(),
                       style: TextStyle(fontSize: 23),
@@ -142,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                     Container(
+                        margin: EdgeInsets.only(right: 8),
                         child: (IconButton(
                           onPressed: calculateRemaining,
                           icon: Icon(Icons.refresh),
