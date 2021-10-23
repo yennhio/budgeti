@@ -27,7 +27,7 @@ class _AddPageState extends State<AddPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              margin: EdgeInsets.only(left: 3, top: 20),
+              margin: EdgeInsets.only(left: 3, top: 25),
               child: (IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -41,7 +41,7 @@ class _AddPageState extends State<AddPage> {
           ),
           Container(
             width: 250,
-            margin: EdgeInsets.only(top:50, left: 47),
+            margin: EdgeInsets.only(top:40, left: 47),
             child: TextField(
               style: TextStyle(fontSize: 16),
               controller: getCategory,
@@ -118,7 +118,7 @@ class _AddPageState extends State<AddPage> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, getCategory);
               },
               child: const Text('Add Expense'),
             ),
