@@ -9,15 +9,16 @@ class AddPage extends StatefulWidget {
   _AddPageState createState() => _AddPageState();
 }
 
+
 class _AddPageState extends State<AddPage> {
 
   late String category = '';
   late String note = '';
   late double total = 0;
 
-  final getCategory = TextEditingController();
-  final getNotes = TextEditingController();
-  final getTotal = TextEditingController();
+  var getCategory = TextEditingController();
+  var getNotes = TextEditingController();
+  var getTotal = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,21 @@ class _AddPageState extends State<AddPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+              margin: EdgeInsets.only(left: 3, top: 20),
+              child: (IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: Colors.grey,
+                    size: 35
+                ),
+              ))
+          ),
+          Container(
             width: 250,
-            margin: EdgeInsets.only(top:100, left: 47),
+            margin: EdgeInsets.only(top:50, left: 47),
             child: TextField(
               style: TextStyle(fontSize: 16),
               controller: getCategory,

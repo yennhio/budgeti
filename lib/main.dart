@@ -5,6 +5,7 @@ void main() {
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -31,11 +32,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   late double remain = 0;
   final textController = TextEditingController();
+  double enteredNumber = 0;
 
   void calculateRemaining() {
-    final enteredNumber = double.parse(textController.text);
+    enteredNumber = double.parse(textController.text);
     setState(() {
       remain = enteredNumber - 5;
     });
@@ -164,7 +167,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]
               ),
 
+
           ],
+
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
@@ -175,7 +181,6 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-
 
 
     );
