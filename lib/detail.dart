@@ -66,7 +66,11 @@ class _DetailPageState extends State<DetailPage> {
               width: 300,
               height: 200,
               decoration: BoxDecoration(
-                  color: Colors.blue.shade100,
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    colors: [Colors.blue.shade100, Colors.blue.shade50]
+                  ),
                   borderRadius: BorderRadius.all(Radius.circular(10))
               ),
 
