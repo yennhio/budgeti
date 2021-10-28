@@ -15,6 +15,8 @@ class AddPage extends StatefulWidget {
 
 
 class _AddPageState extends State<AddPage> {
+  String spending = '';
+  double spend = 0;
 
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
@@ -22,7 +24,10 @@ class _AddPageState extends State<AddPage> {
 
   List<Remaining> remainingTotal = [];
 
-  void addExpense() {
+  void addExpense(spending) {
+    this.spending = spending;
+    spend = double.parse(this.spending);
+    remainingTotal.add(new Remaining(spend));
 
   }
 

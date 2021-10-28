@@ -37,15 +37,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   late double remain = 0;
-  final textController = TextEditingController();
-  double enteredNumber = 0;
+  double income = 0;
   String text = '';
+
+  var getCategory = TextEditingController();
+  var getNotes = TextEditingController();
+  var getTotal = TextEditingController();
 
   void calculateRemaining(text) {
     this.text = text;
-    enteredNumber = double.parse(this.text);
+    income = double.parse(this.text);
     setState(() {
-      remain = enteredNumber - 5;
+      remain = income - 5;
     });
   }
 
@@ -109,7 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: EdgeInsets.only(right: 60, top: 40),
                     width: 100,
                       child: TextField(
-                        controller: textController,
                         style: TextStyle(fontSize: 23),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
@@ -167,6 +169,99 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ]
               ),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 250,
+                  margin: EdgeInsets.only(top:40, left: 47),
+                  child: TextField(
+                    style: TextStyle(fontSize: 16),
+                    controller: getCategory,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
+                        filled: true,
+                        fillColor: Colors.blue.shade50,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none
+                        ),
+                        hintText: "Category e.g. McDonald's"
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 47, top: 20),
+                  width: 300,
+                  child: TextField(
+                    controller: getNotes,
+                    obscureText: false,
+                    maxLines: 4,
+                    textCapitalization: TextCapitalization.sentences,
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
+                        filled: true,
+                        fillColor: Colors.blue.shade50,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none
+                        ),
+                        hintText: "Notes"
+                    ),
+                  ),
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: Text (
+                          'Total',
+                          style: TextStyle(fontSize: 23),
+                        ),
+                      ),
+                      Container(
+                        width: 200,
+                        margin: EdgeInsets.only(top: 20, left: 30, right: 47),
+                        child: TextField(
+                          controller: getTotal,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(fontSize: 23),
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.attach_money),
+                              contentPadding: EdgeInsets.all(10),
+                              filled: true,
+                              fillColor: Colors.blue.shade50,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none
+                              ),
+                              counterText: ""
+                          ),
+                        ),
+                      ),
+                    ]
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 30),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SummaryPage()),
+                      );
+                    },
+                    child: const Text('Add Expense'),
+                  ),
+                ),
+              ],
+            )
 
       ]
       ),
