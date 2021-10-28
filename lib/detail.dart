@@ -19,17 +19,94 @@ class _DetailPageState extends State<DetailPage> {
       body: Column(
         children: [
           Container(
-            child: Text("${widget.details.category}"),
+            margin: EdgeInsets.only(top: 50, right: 300),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: Colors.grey,
+                size: 35,
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 50, left: 50, right: 40, bottom: 10),
+                child: Text("${widget.details.category}",
+                  style: TextStyle(
+                    fontSize: 20,
+                      fontWeight: FontWeight.w700
+                )),
+              ),
+              Spacer(),
+              Container(
+                margin: EdgeInsets.only(top: 50, right: 50, bottom: 10),
+                child: Text("${widget.details.total}",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700
+                  )
+                )
+              )
+            ],
           ),
           Container(
-            child: Text("${widget.details.notes}"),
-
+            margin: EdgeInsets.only(top: 20, bottom: 50),
+            width: 295,
+            height: 100,
+            color: Colors.blue.shade100,
+            child: Text("${widget.details.notes}",
+                style: TextStyle(
+                    fontSize: 17
+                )),
           ),
-          Container(
-            child: Text("${widget.details.total}"),
-
-          )
-
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: '',)),
+                  );
+                },
+                icon: Icon(
+                    Icons.home_filled,
+                    color: Colors.grey,
+                    size: 35
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddPage()),
+                  );
+                },
+                icon: Icon(
+                    Icons.add_circle_outline,
+                    color: Colors.grey,
+                    size: 35
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SummaryPage()),
+                  );
+                },
+                icon: Icon(
+                    Icons.format_list_bulleted,
+                    color: Colors.grey,
+                    size: 35
+                ),
+              )
+            ],
+          ),
         ]
       )
     );
