@@ -41,12 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
   double enteredNumber = 0;
   String text = '';
 
-  @override
-  void dispose(){
-    super.dispose();
-    textController.dispose();
-  }
-
   void calculateRemaining(text) {
     this.text = text;
     enteredNumber = double.parse(this.text);

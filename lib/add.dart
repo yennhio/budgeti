@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'summary.dart';
 import 'expense.dart';
+import 'remaining.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -19,6 +20,11 @@ class _AddPageState extends State<AddPage> {
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
 
+  List<Remaining> remainingTotal = [];
+
+  void addExpense() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
