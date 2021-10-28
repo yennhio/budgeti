@@ -46,7 +46,7 @@ class _AddPageState extends State<AddPage> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(10),
                   filled: true,
-                  fillColor: Colors.blue.shade100,
+                  fillColor: Colors.blue.shade50,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none
@@ -66,7 +66,7 @@ class _AddPageState extends State<AddPage> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(10),
                   filled: true,
-                  fillColor: Colors.blue.shade100,
+                  fillColor: Colors.blue.shade50,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none
@@ -96,7 +96,7 @@ class _AddPageState extends State<AddPage> {
                       prefixIcon: Icon(Icons.attach_money),
                       contentPadding: EdgeInsets.all(10),
                       filled: true,
-                      fillColor: Colors.blue.shade100,
+                      fillColor: Colors.blue.shade50,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none
