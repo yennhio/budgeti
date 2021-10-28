@@ -103,19 +103,7 @@ class _DetailPageState extends State<DetailPage> {
                     size: 35
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddPage()),
-                  );
-                },
-                icon: Icon(
-                    Icons.add_circle_outline,
-                    color: Colors.grey,
-                    size: 35
-                ),
-              ),
+
               IconButton(
                 onPressed: () {
                   Navigator.push(
