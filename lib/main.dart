@@ -269,10 +269,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed:() {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddPage()),
+            MaterialPageRoute(builder: (context) => SummaryPage()),
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.format_list_bulleted),
       ), // This trailing comma makes auto-formatting nicer for build methods.
 
 
