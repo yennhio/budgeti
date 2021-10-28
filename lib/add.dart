@@ -7,6 +7,7 @@ import 'expense.dart';
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
 
+
   @override
   _AddPageState createState() => _AddPageState();
 }
@@ -17,6 +18,7 @@ class _AddPageState extends State<AddPage> {
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
