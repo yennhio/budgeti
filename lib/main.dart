@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late double remain = 0;
   final textController = TextEditingController();
   double enteredNumber = 0;
+  String text = '';
 
   @override
   void dispose(){
@@ -46,8 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
     textController.dispose();
   }
 
-  void calculateRemaining() {
-    enteredNumber = double.parse(textController.text);
+  void calculateRemaining(text) {
+    this.text = text;
+    enteredNumber = double.parse(this.text);
     setState(() {
       remain = enteredNumber - 5;
     });
@@ -128,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             counterText: ""
                         ),
-                        onChanged: (double) => this.calculateRemaining(text)
+                        onChanged: (text) => this.calculateRemaining(text)
                       ),
                      ),
                 ],
@@ -152,6 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   Container(
+                    margin: EdgeInsets.only(top: 7, right: 60),
                     width: 100,
                     height: 39,
                     decoration: BoxDecoration(
@@ -167,13 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                    Container(
-                        margin: EdgeInsets.only(right: 8),
-                        child: (IconButton(
-                          onPressed: calculateRemaining,
-                          icon: Icon(Icons.refresh, color: Colors.grey),
-                        ))
-                    )
+
                 ]
               ),
 
