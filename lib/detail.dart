@@ -18,9 +18,17 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       body: Column(
         children: [
-          Text("${widget.details.category}"),
-          Text("${widget.details.notes}"),
-          Text("${widget.details.total}"),
+          Container(
+            child: Text("${widget.details.category}"),
+          ),
+          Container(
+            child: Text("${widget.details.notes}"),
+
+          ),
+          Container(
+            child: Text("${widget.details.total}"),
+
+          )
 
         ]
       )

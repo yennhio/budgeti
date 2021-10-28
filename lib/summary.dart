@@ -1,4 +1,3 @@
-import 'package:budgit/detail.dart';
 import 'package:flutter/material.dart';
 import 'add.dart';
 import 'expense.dart';
