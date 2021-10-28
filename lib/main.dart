@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add.dart';
+import 'expense.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -167,10 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]
               ),
 
-
-          ],
-
-
+      ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {

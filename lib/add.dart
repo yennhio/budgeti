@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'summary.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -12,13 +13,10 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
 
-  late String category = '';
-  late String note = '';
-  late double total = 0;
-
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +116,10 @@ class _AddPageState extends State<AddPage> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
-                Navigator.pop(context, getCategory);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SummaryPage()),
+                );
               },
               child: const Text('Add Expense'),
             ),
