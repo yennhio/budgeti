@@ -18,23 +18,28 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 50, right: 300),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                  Icons.arrow_back_rounded,
-                  color: Colors.grey,
-                size: 35,
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 50, left: 30),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                      Icons.arrow_back_rounded,
+                      color: Colors.grey,
+                    size: 35,
+                  ),
+                ),
               ),
-            ),
+              Spacer()
+            ],
           ),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 50, left: 50, right: 40, bottom: 10),
+                margin: EdgeInsets.only(top: 30, left: 50, right: 40, bottom: 10),
                 child: Text("${widget.details.category}",
                   style: TextStyle(
                     fontSize: 20,
@@ -43,7 +48,7 @@ class _DetailPageState extends State<DetailPage> {
               ),
               Spacer(),
               Container(
-                margin: EdgeInsets.only(top: 50, right: 50, bottom: 10),
+                margin: EdgeInsets.only(top: 30, right: 50, bottom: 10),
                 child: Text("${widget.details.total}",
                   style: TextStyle(
                     fontSize: 20,
@@ -53,15 +58,30 @@ class _DetailPageState extends State<DetailPage> {
               )
             ],
           ),
-          Container(
-            margin: EdgeInsets.only(top: 20, bottom: 50),
-            width: 295,
-            height: 100,
-            color: Colors.blue.shade100,
-            child: Text("${widget.details.notes}",
-                style: TextStyle(
-                    fontSize: 17
-                )),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+              margin: EdgeInsets.only(top: 20, bottom: 50),
+              width: 300,
+              height: 200,
+              decoration: BoxDecoration(
+                  color: Colors.blue.shade100,
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+
+            ),
+              Container(
+                margin: EdgeInsets.only(top: 30, bottom: 50),
+                width: 280,
+                height: 200,
+                child: Text("${widget.details.notes}",
+                    style: TextStyle(
+                        fontSize: 17
+                    )
+                ),
+              )
+            ]
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,7 +116,7 @@ class _DetailPageState extends State<DetailPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddPage()),
+                    MaterialPageRoute(builder: (context) => SummaryPage()),
                   );
                 },
                 icon: Icon(

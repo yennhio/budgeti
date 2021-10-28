@@ -17,7 +17,6 @@ class _AddPageState extends State<AddPage> {
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

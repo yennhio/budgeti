@@ -17,7 +17,7 @@ class _SummaryPageState extends State<SummaryPage> {
 
   _SummaryPageState() {
 
-    Expense e1 = Expense("McDonalds", "after school", 23.34);
+    Expense e1 = Expense("McDonalds", "after school asdjslg salgkajs;dlg jasldgjsd adsgjsdlg sdgjlsdjjs glskd", 23.34);
     Expense e2 = Expense("Gas", "Chevron gas to mom's house", 50.20);
 
     expenses = [e1, e2];
