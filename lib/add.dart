@@ -24,7 +24,7 @@ class _AddPageState extends State<AddPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              margin: EdgeInsets.only(left: 3, top: 25),
+              margin: EdgeInsets.only(left: 30, top: 50),
               child: (IconButton(
                 onPressed: () {
                   Navigator.pop(context);
