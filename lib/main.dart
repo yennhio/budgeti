@@ -40,6 +40,12 @@ class _MyHomePageState extends State<MyHomePage> {
   final textController = TextEditingController();
   double enteredNumber = 0;
 
+  @override
+  void dispose(){
+    super.dispose();
+    textController.dispose();
+  }
+
   void calculateRemaining() {
     enteredNumber = double.parse(textController.text);
     setState(() {
@@ -122,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             counterText: ""
                         ),
+                        onChanged: (double) => this.calculateRemaining(text)
                       ),
                      ),
                 ],
