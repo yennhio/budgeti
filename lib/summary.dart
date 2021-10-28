@@ -1,7 +1,9 @@
+import 'package:budgit/detail.dart';
 import 'package:flutter/material.dart';
 import 'add.dart';
 import 'expense.dart';
 import 'main.dart';
+import 'detail.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -34,6 +36,10 @@ class _SummaryPageState extends State<SummaryPage> {
               return ListTile(
                 onTap: (){
                   print('${expenses[index].notes}');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailPage(expenses[index])),
+                  );
                 },
                 title: Container(
                   height: 50,
