@@ -31,25 +31,30 @@ class _SummaryPageState extends State<SummaryPage> {
         child: ListView.builder(
             itemCount: expenses.length,
             itemBuilder: (BuildContext context, int index){
-              return Container(
-                height: 50,
-                margin: EdgeInsets.only(top: 5, bottom: 5, left: 50, right: 50),
-                  child: Row(
-                    children: [
-                      Text(
-                          '${expenses[index].category}',
-                            style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w700),
-                      ),
-                      Spacer(),
-                      Text(
-                          '${expenses[index].total}',
-                        style: TextStyle(
-                            fontSize: 20),
-                      )
-                    ]
-                  )
+              return ListTile(
+                onTap: (){
+                  print('${expenses[index].notes}');
+                },
+                title: Container(
+                  height: 50,
+                  margin: EdgeInsets.only(top: 5, bottom: 5, left: 50, right: 50),
+                    child: Row(
+                      children: [
+                        Text(
+                            '${expenses[index].category}',
+                              style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w700),
+                        ),
+                        Spacer(),
+                        Text(
+                            '${expenses[index].total}',
+                          style: TextStyle(
+                              fontSize: 20),
+                        )
+                      ]
+                    )
 
+                ),
               );
             }
         ),
