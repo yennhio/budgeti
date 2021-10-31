@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'expense.dart';
 import 'detail.dart';
 import 'summary.dart';
@@ -39,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double income = 0;
   String text = '';
 
+  final incomeInput = TextEditingController();
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
@@ -112,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: EdgeInsets.only(right: 60, top: 40),
                       width: 100,
                         child: TextField(
+                          controller: incomeInput,
                           style: TextStyle(fontSize: 23),
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
