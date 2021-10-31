@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'expense.dart';
 import 'detail.dart';
 import 'summary.dart';
+import 'income.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,6 +40,22 @@ class _MyHomePageState extends State<MyHomePage> {
   late double remain = 0;
   double income = 0;
   String text = '';
+
+  String testIncome = "";
+
+  @override
+  void initState() {
+    getIncome();
+  }
+
+  getIncome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      testIncome = prefs.getString('testIncome')!;
+    });
+  }
+
+
 
   final incomeInput = TextEditingController();
   var getCategory = TextEditingController();
@@ -114,7 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: EdgeInsets.only( top: 40),
                       width: 100,
                         child: TextField(
-                          controller: incomeInput,
                           style: TextStyle(fontSize: 23),
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
@@ -135,8 +151,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       margin: EdgeInsets.only(top: 40, right: 10),
                       child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
+                        onPressed: ()  {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IncomePage()),
+                          );
                         },
                         icon: Icon(
                           Icons.create_rounded,
