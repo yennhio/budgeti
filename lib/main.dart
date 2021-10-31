@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 60, top: 40),
+                      margin: EdgeInsets.only( top: 40),
                       width: 100,
                         child: TextField(
                           controller: incomeInput,
@@ -132,6 +132,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           onChanged: (text) => this.calculateRemaining(text)
                         ),
                        ),
+                    Container(
+                      margin: EdgeInsets.only(top: 40, right: 10),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.create_rounded,
+                          color: Colors.grey,
+                          size: 35,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                Row(
