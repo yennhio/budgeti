@@ -41,22 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
   double income = 0;
   String text = '';
 
-  String testIncome = "";
-
-  @override
-  void initState() {
-    getIncome();
-  }
-
-  getIncome() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      testIncome = prefs.getString('testIncome')!;
-    });
-  }
-
-
-
   final incomeInput = TextEditingController();
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
