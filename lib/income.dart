@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'expense.dart';
 import 'detail.dart';
 import 'summary.dart';
+import 'main.dart';
 
 class IncomePage extends StatefulWidget {
   const IncomePage({Key? key}) : super(key: key);
@@ -15,6 +16,13 @@ class IncomePage extends StatefulWidget {
 class _IncomePageState extends State<IncomePage> {
 
   final incomeInput = TextEditingController();
+
+  Future<bool> saveText() async{
+    String realIncome = incomeInput.text;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('OurText', realIncome);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +81,12 @@ class _IncomePageState extends State<IncomePage> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {
+                  onPressed: ()  {
+                    saveText();
+                    MyHomePageState().setText();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyHomePage(title: '')),
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: incomeInput.text)),
                     );
                   },
                   child: const Text('Save'),
@@ -87,5 +97,7 @@ class _IncomePageState extends State<IncomePage> {
         ],
       )
     );
+
+
   }
 }

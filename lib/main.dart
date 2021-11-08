@@ -21,27 +21,50 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Open Sans'
       ),
-      home: MyHomePage(title: 'My spending'),
+      home: MyHomePage(title: 'My spending', incomeInput: ''),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title, required this.incomeInput}) : super(key: key);
 
   final String title;
+  final String incomeInput;//if you have multiple values add here
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
+
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
+
+
+  String displayIncome = '';
+
+  Future<String?> getText() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('OurText');
+  }
+
+  setText() {
+    getText().then((value) {
+      setState(() {
+        displayIncome = value!;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setText();
+  }
 
   late double remain = 0;
   double income = 0;
   String text = '';
 
-  final incomeInput = TextEditingController();
   var getCategory = TextEditingController();
   var getNotes = TextEditingController();
   var getTotal = TextEditingController();
@@ -112,26 +135,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only( top: 40),
+                      margin: EdgeInsets.only(top: 40),
                       width: 100,
-                        child: TextField(
-                          style: TextStyle(fontSize: 23),
+                      height: 39,
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade100,
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(
+                        child: Text(
+                          displayIncome,
+                          style: TextStyle(
+                              fontSize: 23),
                           textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 10),
-                              isDense: true,
-                              filled: true,
-                              fillColor: Colors.blue.shade100,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none
-                              ),
-                              counterText: ""
-                          ),
-                          onChanged: (text) => this.calculateRemaining(text)
                         ),
-                       ),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.only(top: 40, right: 10),
                       child: IconButton(

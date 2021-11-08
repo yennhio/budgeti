@@ -93,7 +93,7 @@ class _DetailPageState extends State<DetailPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyHomePage(title: '',)),
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),
                   );
                 },
                 icon: Icon(
