@@ -26,8 +26,34 @@ class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 150,
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [Colors.blue, Colors.white]
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.blue.withOpacity(0.4),
+                        spreadRadius: 7,
+                        blurRadius: 30,
+                        offset: Offset(0, 3)
+                    )
+                  ]
+              )
+          ),
+          title: Text(
+              'Your Spending Summary',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600)),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          elevation: 0
+        ),
         body: Container(
-          margin: EdgeInsets.only(top:50),
+          margin: EdgeInsets.only(top:30),
           child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (BuildContext context, int index){
@@ -62,7 +88,18 @@ class _SummaryPageState extends State<SummaryPage> {
                 );
               }
           ),
-        )
+
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed:() {
+          Navigator.pop(
+            context
+          );
+        },
+        elevation: 0,
+        child: Icon(Icons.home_filled),
+
+      ), //
     );
   }
 }
