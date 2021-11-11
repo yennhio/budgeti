@@ -4,8 +4,10 @@ import 'main.dart';
 import 'summary.dart';
 
 class DetailPage extends StatefulWidget {
-  var details;
-  DetailPage(this.details);
+  String types;
+  String noters;
+  double amount;
+  DetailPage(this.types, this.noters, this.amount);
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -39,7 +41,7 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 30, left: 50, right: 40, bottom: 10),
-                child: Text("${widget.details.category}",
+                child: Text("${widget.types}",
                   style: TextStyle(
                     fontSize: 20,
                       fontWeight: FontWeight.w700
@@ -48,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
               Spacer(),
               Container(
                 margin: EdgeInsets.only(top: 30, right: 50, bottom: 10),
-                child: Text("${widget.details.total}",
+                child: Text("${widget.amount}",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700
@@ -78,7 +80,7 @@ class _DetailPageState extends State<DetailPage> {
                 margin: EdgeInsets.only(top: 30, bottom: 50),
                 width: 280,
                 height: 200,
-                child: Text("${widget.details.notes}",
+                child: Text("${widget.noters}",
                     style: TextStyle(
                         fontSize: 17
                     )

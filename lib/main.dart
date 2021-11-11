@@ -27,10 +27,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title, required this.incomeInput}) : super(key: key);
+  MyHomePage({Key? key, required this.title, required String incomeInput}) : super(key: key);
 
   final String title;
-  final String incomeInput;//if you have multiple values add here
 
   @override
   MyHomePageState createState() => MyHomePageState();
@@ -38,7 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-
 
   String displayIncome = '';
 
@@ -76,6 +74,26 @@ class MyHomePageState extends State<MyHomePage> {
       remain = income;
     });
   }
+
+
+  Future<bool> saveCategory() async{
+    String categore = getCategory.text;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('YourCategory', categore);
+  }
+
+  Future<bool> saveNotes() async{
+    String noter = getNotes.text;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('YourNote', noter);
+  }
+
+  Future<bool> saveTotal() async{
+    double totale = double.parse(getTotal.text);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setDouble('YourTotale', totale);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +239,7 @@ class MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10),
                           filled: true,
-                          fillColor: Colors.blue.shade50,
+                          fillColor: Colors.white,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none
@@ -241,7 +259,7 @@ class MyHomePageState extends State<MyHomePage> {
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10),
                           filled: true,
-                          fillColor: Colors.blue.shade50,
+                          fillColor: Colors.white,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none
@@ -271,7 +289,7 @@ class MyHomePageState extends State<MyHomePage> {
                                 prefixIcon: Icon(Icons.attach_money),
                                 contentPadding: EdgeInsets.all(10),
                                 filled: true,
-                                fillColor: Colors.blue.shade50,
+                                fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide.none
@@ -290,6 +308,9 @@ class MyHomePageState extends State<MyHomePage> {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
+                        saveCategory();
+                        saveNotes();
+                        saveTotal();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SummaryPage()),

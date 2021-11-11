@@ -12,16 +12,12 @@ class SummaryPage extends StatefulWidget {
 
 class _SummaryPageState extends State<SummaryPage> {
 
-  List<Expense> expenses = <Expense>[];
 
-  _SummaryPageState() {
+  List<String> type = ["insurance", "phone", "food", "hola"];
+  List<String> noties = ["yesterday,,", "Nov 2", "McDonalds", "hb ice"];
+  List<double> totl = [23, 100, 50, 40];
 
-    Expense e1 = Expense("McDonalds", "after school asdjslg salgkajs;dlg jasldgjsd adsgjsdlg sdgjlsdjjs glskd", 23.34);
-    Expense e2 = Expense("Gas", "Chevron gas to mom's house", 50.20);
 
-    expenses = [e1, e2];
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +51,13 @@ class _SummaryPageState extends State<SummaryPage> {
         body: Container(
           margin: EdgeInsets.only(top:30),
           child: ListView.builder(
-              itemCount: expenses.length,
+              itemCount: type.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
                   onTap: (){
-                    print('${expenses[index].notes}');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetailPage(expenses[index])),
+                      MaterialPageRoute(builder: (context) => DetailPage(type[index], noties[index], totl[index])),
                     );
                   },
                   title: Container(
@@ -71,13 +66,13 @@ class _SummaryPageState extends State<SummaryPage> {
                       child: Row(
                           children: [
                             Text(
-                              '${expenses[index].category}',
+                              '${type[index]}',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                             Spacer(),
                             Text(
-                              '${expenses[index].total}',
+                              '${totl[index]}',
                               style: TextStyle(
                                   fontSize: 20),
                             )
@@ -92,8 +87,9 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
-          Navigator.pop(
-            context
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),
           );
         },
         elevation: 0,

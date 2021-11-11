@@ -86,7 +86,7 @@ class _IncomePageState extends State<IncomePage> {
                     MyHomePageState().setText();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: incomeInput.text)),
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),
                     );
                   },
                   child: const Text('Save'),
