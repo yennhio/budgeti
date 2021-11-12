@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'expense.dart';
 import 'detail.dart';
 import 'summary.dart';
 import 'income.dart';
