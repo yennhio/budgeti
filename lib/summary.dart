@@ -1,20 +1,122 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);
 
   @override
-  _SummaryPageState createState() => _SummaryPageState();
+  SummaryPageState createState() => SummaryPageState();
 }
 
-class _SummaryPageState extends State<SummaryPage> {
+class SummaryPageState extends State<SummaryPage> {
 
 
-  List<String> type = ["insurance", "phone", "food", "hola"];
-  List<String> noties = ["yesterday,,", "Nov 2", "McDonalds", "hb ice"];
-  List<double> totl = [23, 100, 50, 40];
+  Future<String?> getCategory() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('YourCategory');
+  }
+
+  Future<String?> getNotes() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('YourNote');
+  }
+
+  Future<double?> getTotal() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble('YourTotal');
+  }
+
+  List<String> categ = [];
+  List<String> notes = [];
+  List<double> total = [];
+
+  String jsonCateg = '';
+  String jsonNotes = '';
+  String jsonTotal = '';
+
+  listToJson() {
+    jsonCateg = jsonEncode(categ);
+    jsonNotes = jsonEncode(notes);
+    jsonTotal = jsonEncode(total);
+  }
+
+  jsonToList() {
+    var dartCateg = jsonDecode(jsonCateg);
+    categ = dartCateg != null ? List.from(dartCateg) : null!;
+
+    var dartNotes = jsonDecode(jsonNotes);
+    notes = dartNotes != null ? List.from(dartNotes) : null!;
+
+    var dartTotal = jsonDecode(jsonTotal);
+    total = dartTotal != null ? List.from(dartTotal) : null!;
+  }
+
+  setCard() {
+    getCategory().then((value) {
+      setState(() {
+        categ.add(value!);
+      });
+    });
+
+    getNotes().then((value) {
+      setState(() {
+        notes.add(value!);
+      });
+    });
+
+    getTotal().then((value) {
+      setState(() {
+        total.add(value!);
+      });
+    });
+
+    listToJson();
+    saveCategArray();
+    saveNotesArray();
+    saveTotalArray();
+    jsonToList();
+
+  }
+
+  Future<bool> saveCategArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('YourCategArray', jsonCateg);
+  }
+
+  Future<bool> saveNotesArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('YourNotesArray', jsonNotes);
+  }
+
+  Future<bool> saveTotalArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('YourTotalArray', jsonTotal);
+  }
+
+  @override
+  void initState() {
+
+    setCard();
+  }
+
+  Future<bool> saveRemaining() async {
+    double remaining;
+    double enteredIncome = double.parse(MyHomePageState().displayIncome);
+    double totalSpent = 0;
+
+    for (var i=0; i<total.length; i++)
+      totalSpent = totalSpent + total[i];
+
+    remaining = enteredIncome - totalSpent;
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setDouble('YourRemaining', remaining);
+  }
+
+
 
 
 
@@ -50,13 +152,13 @@ class _SummaryPageState extends State<SummaryPage> {
         body: Container(
           margin: EdgeInsets.only(top:30),
           child: ListView.builder(
-              itemCount: type.length,
+              itemCount: categ.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetailPage(type[index], noties[index], totl[index])),
+                      MaterialPageRoute(builder: (context) => DetailPage(categ[index], notes[index], total[index])),
                     );
                   },
                   title: Container(
@@ -65,13 +167,13 @@ class _SummaryPageState extends State<SummaryPage> {
                       child: Row(
                           children: [
                             Text(
-                              '${type[index]}',
+                              '${categ[index]}',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                             Spacer(),
                             Text(
-                              '${totl[index]}',
+                              '${total[index]}',
                               style: TextStyle(
                                   fontSize: 20),
                             )
@@ -86,6 +188,7 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
+          saveRemaining();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),

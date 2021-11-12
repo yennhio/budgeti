@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'detail.dart';
 import 'summary.dart';
 import 'income.dart';
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Budgit Demo',
+      title: 'Budgit',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -39,13 +38,13 @@ class MyHomePageState extends State<MyHomePage> {
 
   String displayIncome = '';
 
-  Future<String?> getText() async{
+  Future<String?> getIncome() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('OurText');
+    return prefs.getString('YourIncome');
   }
 
-  setText() {
-    getText().then((value) {
+  setIncome() {
+    getIncome().then((value) {
       setState(() {
         displayIncome = value!;
       });
@@ -55,16 +54,17 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    setText();
+    setIncome();
+    setRemaining();
   }
 
   late double remain = 0;
   double income = 0;
   String text = '';
 
-  var getCategory = TextEditingController();
-  var getNotes = TextEditingController();
-  var getTotal = TextEditingController();
+  final getCategory = TextEditingController();
+  final getNotes = TextEditingController();
+  final getTotal = TextEditingController();
 
   void calculateRemaining(text) {
     this.text = text;
@@ -76,21 +76,36 @@ class MyHomePageState extends State<MyHomePage> {
 
 
   Future<bool> saveCategory() async{
-    String categore = getCategory.text;
+    String realCategory = getCategory.text;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('YourCategory', categore);
+    return prefs.setString('YourCategory', realCategory);
   }
 
   Future<bool> saveNotes() async{
-    String noter = getNotes.text;
+    String realNote = getNotes.text;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('YourNote', noter);
+    return prefs.setString('YourNote', realNote);
   }
 
   Future<bool> saveTotal() async{
-    double totale = double.parse(getTotal.text);
+    double realTotal = double.parse(getTotal.text);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setDouble('YourTotale', totale);
+    return prefs.setDouble('YourTotal', realTotal);
+  }
+
+  Future<double?> getRemaining() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble('YourRemaining');
+  }
+
+  double displayRemaining = 0;
+
+  setRemaining() {
+    getRemaining().then((value) {
+      setState(() {
+        displayRemaining = value!;
+      });
+    });
   }
 
 
@@ -214,7 +229,7 @@ class MyHomePageState extends State<MyHomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          remain == null ? '0' : remain.toString(),
+                          displayRemaining.toString(),
                           style: TextStyle(
                               fontSize: 23),
                           textAlign: TextAlign.center,
@@ -310,6 +325,8 @@ class MyHomePageState extends State<MyHomePage> {
                         saveCategory();
                         saveNotes();
                         saveTotal();
+                        SummaryPageState().saveRemaining();
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SummaryPage()),

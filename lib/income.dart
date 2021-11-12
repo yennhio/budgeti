@@ -1,8 +1,5 @@
-import 'package:budgit/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'detail.dart';
-import 'summary.dart';
 import 'main.dart';
 
 class IncomePage extends StatefulWidget {
@@ -16,10 +13,9 @@ class _IncomePageState extends State<IncomePage> {
 
   final incomeInput = TextEditingController();
 
-  Future<bool> saveText() async{
-    String realIncome = incomeInput.text;
+  Future<bool> saveIncome() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('OurText', realIncome);
+    return prefs.setString('YourIncome', incomeInput.text);
   }
 
 
@@ -81,8 +77,8 @@ class _IncomePageState extends State<IncomePage> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: ()  {
-                    saveText();
-                    MyHomePageState().setText();
+                    saveIncome();
+                    MyHomePageState().setIncome();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),
