@@ -15,7 +15,7 @@ class _IncomePageState extends State<IncomePage> {
 
   Future<bool> saveIncome() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('YourIncome', incomeInput.text);
+    return prefs.setDouble('YourIncome', double.parse(incomeInput.text));
   }
 
 
@@ -78,7 +78,6 @@ class _IncomePageState extends State<IncomePage> {
                   ),
                   onPressed: ()  {
                     saveIncome();
-                    MyHomePageState().setIncome();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),

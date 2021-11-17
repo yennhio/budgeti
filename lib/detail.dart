@@ -108,7 +108,7 @@ class _DetailPageState extends State<DetailPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SummaryPage()),
+                    MaterialPageRoute(builder: (context) => SummaryPage('', '', 0)),
                   );
                 },
                 icon: Icon(

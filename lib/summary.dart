@@ -5,7 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class SummaryPage extends StatefulWidget {
-  const SummaryPage({Key? key}) : super(key: key);
+  String categories;
+  String noters;
+  double totale;
+  SummaryPage(this.categories, this.noters, this.totale);
 
   @override
   SummaryPageState createState() => SummaryPageState();
@@ -37,53 +40,15 @@ class SummaryPageState extends State<SummaryPage> {
   String jsonNotes = '';
   String jsonTotal = '';
 
-  listToJson() {
-    jsonCateg = jsonEncode(categ);
-    jsonNotes = jsonEncode(notes);
-    jsonTotal = jsonEncode(total);
-  }
-
-  jsonToList() {
-    var dartCateg = jsonDecode(jsonCateg);
-    categ = dartCateg != null ? List.from(dartCateg) : null!;
-
-    var dartNotes = jsonDecode(jsonNotes);
-    notes = dartNotes != null ? List.from(dartNotes) : null!;
-
-    var dartTotal = jsonDecode(jsonTotal);
-    total = dartTotal != null ? List.from(dartTotal) : null!;
-  }
-
-  setCard() {
-    getCategory().then((value) {
-      setState(() {
-        categ.add(value!);
-      });
-    });
-
-    getNotes().then((value) {
-      setState(() {
-        notes.add(value!);
-      });
-    });
-
-    getTotal().then((value) {
-      setState(() {
-        total.add(value!);
-      });
-    });
-
-    listToJson();
-    saveCategArray();
-    saveNotesArray();
-    saveTotalArray();
-    jsonToList();
-
-  }
 
   Future<bool> saveCategArray() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString('YourCategArray', jsonCateg);
+  }
+
+  Future<String?> getCategArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('YourCategArray');
   }
 
   Future<bool> saveNotesArray() async{
@@ -91,31 +56,85 @@ class SummaryPageState extends State<SummaryPage> {
     return prefs.setString('YourNotesArray', jsonNotes);
   }
 
+  Future<String?> getNotesArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('YourNotesArray');
+  }
+
+
   Future<bool> saveTotalArray() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString('YourTotalArray', jsonTotal);
   }
 
+  Future<String?> getTotalArray() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('YourTotalArray');
+  }
+
+  addCard() {
+
+      getCategArray().then((value) {
+          var dartCateg = jsonDecode(value!);
+          categ = dartCateg != null ? List.from(dartCateg) : null!;
+
+        if (widget.categories != '')
+          categ.add(widget.categories);
+
+        setState(() {
+          this.categ = categ;
+        });
+
+        jsonCateg = jsonEncode(categ);
+        saveCategArray();
+
+      });
+
+
+      getNotesArray().then((value) {
+          var dartNotes = jsonDecode(value!);
+          notes = dartNotes != null ? List.from(dartNotes) : null!;
+
+        if (widget.noters != '') {
+          notes.add(widget.noters);
+        }
+
+        setState(() {
+          this.notes = notes;
+        });
+
+        jsonNotes = jsonEncode(notes);
+        saveNotesArray();
+
+    });
+
+
+      getTotalArray().then((value) {
+          var dartTotal = jsonDecode(value!);
+          total = dartTotal != null ? List.from(dartTotal) : null!;
+
+
+        if (widget.totale != 0) {
+          total.add(widget.totale);
+        }
+
+        setState(() {
+          this.total = total;
+        });
+
+        jsonTotal = jsonEncode(total);
+        saveTotalArray();
+
+      });
+
+
+
+  }
+
   @override
   void initState() {
-
-    setCard();
+      addCard();
   }
-
-  Future<bool> saveRemaining() async {
-    double remaining;
-    double enteredIncome = double.parse(MyHomePageState().displayIncome);
-    double totalSpent = 0;
-
-    for (var i=0; i<total.length; i++)
-      totalSpent = totalSpent + total[i];
-
-    remaining = enteredIncome - totalSpent;
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setDouble('YourRemaining', remaining);
-  }
-
 
 
 
@@ -161,6 +180,21 @@ class SummaryPageState extends State<SummaryPage> {
                       MaterialPageRoute(builder: (context) => DetailPage(categ[index], notes[index], total[index])),
                     );
                   },
+                  onLongPress: () {
+                    setState(() {
+                      categ.removeAt(index);
+                      notes.removeAt(index);
+                      total.removeAt(index);
+                    });
+
+                    jsonNotes = jsonEncode(notes);
+                    saveNotesArray();
+                    jsonCateg = jsonEncode(categ);
+                    saveCategArray();
+                    jsonTotal = jsonEncode(total);
+                    saveTotalArray();
+
+                  },
                   title: Container(
                       height: 50,
                       margin: EdgeInsets.only(top: 5, bottom: 5, left: 50, right: 50),
@@ -188,10 +222,9 @@ class SummaryPageState extends State<SummaryPage> {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
-          saveRemaining();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '',)),
+            MaterialPageRoute(builder: (context) => MyHomePage(title: '', incomeInput: '')),
           );
         },
         elevation: 0,

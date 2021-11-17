@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'summary.dart';
 import 'income.dart';
+import 'dart:convert';
+
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Budgit',
+      title: 'Budgeti',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -36,11 +38,11 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
 
-  String displayIncome = '';
+  double displayIncome = 0;
 
-  Future<String?> getIncome() async{
+  Future<double?> getIncome() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('YourIncome');
+    return prefs.getDouble('YourIncome');
   }
 
   setIncome() {
@@ -51,28 +53,9 @@ class MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    setIncome();
-    setRemaining();
-  }
-
-  late double remain = 0;
-  double income = 0;
-  String text = '';
-
   final getCategory = TextEditingController();
   final getNotes = TextEditingController();
   final getTotal = TextEditingController();
-
-  void calculateRemaining(text) {
-    this.text = text;
-    income = double.parse(this.text);
-    setState(() {
-      remain = income;
-    });
-  }
 
 
   Future<bool> saveCategory() async{
@@ -93,21 +76,51 @@ class MyHomePageState extends State<MyHomePage> {
     return prefs.setDouble('YourTotal', realTotal);
   }
 
+  double remain = 0;
+  calculateRemaining() {
+
+    List<double> remainArray = [];
+    double fullIncome = 0;
+    double totalExpenses = 0;
+
+    getIncome().then((value) {
+        fullIncome = value!;
+    });
+
+    SummaryPageState().getTotalArray().then((value) {
+
+      var dartRemain = jsonDecode(value!);
+      remainArray = dartRemain != null ? List.from(dartRemain) : null!;
+
+      for (int i=0; i<remainArray.length; i++) {
+        totalExpenses += remainArray[i];
+      }
+
+      setState(() {
+        remain = fullIncome - totalExpenses;
+      });
+
+    });
+
+
+  }
+
+  Future<bool> saveRemaining() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setDouble('YourRemaining', double.parse(getIncome().toString()) - double.parse(getTotal.text));
+  }
+
   Future<double?> getRemaining() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getDouble('YourRemaining');
   }
 
-  double displayRemaining = 0;
-
-  setRemaining() {
-    getRemaining().then((value) {
-      setState(() {
-        displayRemaining = value!;
-      });
-    });
+  @override
+  void initState() {
+    super.initState();
+    setIncome();
+    calculateRemaining();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +189,7 @@ class MyHomePageState extends State<MyHomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          displayIncome,
+                          displayIncome.toString(),
                           style: TextStyle(
                               fontSize: 23),
                           textAlign: TextAlign.center,
@@ -229,7 +242,7 @@ class MyHomePageState extends State<MyHomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          displayRemaining.toString(),
+                          remain.toString(),
                           style: TextStyle(
                               fontSize: 23),
                           textAlign: TextAlign.center,
@@ -322,14 +335,10 @@ class MyHomePageState extends State<MyHomePage> {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        saveCategory();
-                        saveNotes();
-                        saveTotal();
-                        SummaryPageState().saveRemaining();
 
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SummaryPage()),
+                          MaterialPageRoute(builder: (context) => SummaryPage(getCategory.text, getNotes.text, double.parse(getTotal.text))),
                         );
                       },
                       child: const Text('Add Expense'),
@@ -345,7 +354,7 @@ class MyHomePageState extends State<MyHomePage> {
         onPressed:() {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SummaryPage()),
+            MaterialPageRoute(builder: (context) => SummaryPage(getCategory.text, getNotes.text, 0)),
           );
         },
         child: Icon(Icons.format_list_bulleted),
