@@ -271,7 +271,7 @@ class MyHomePageState extends State<MyHomePage> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none
                           ),
-                          hintText: "Category e.g. McDonald's"
+                          hintText: "Category (Required)"
                       ),
                     ),
                   ),
@@ -291,7 +291,7 @@ class MyHomePageState extends State<MyHomePage> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none
                           ),
-                          hintText: "Notes"
+                          hintText: "Notes (Required)"
                       ),
                     ),
                   ),
@@ -321,6 +321,7 @@ class MyHomePageState extends State<MyHomePage> {
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide.none
                                 ),
+                                hintText: "(Required)",
                                 counterText: ""
                             ),
                           ),
